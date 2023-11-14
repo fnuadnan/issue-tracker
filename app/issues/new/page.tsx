@@ -10,6 +10,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { createIssueSchema } from "@/app/ValidationSchemas";
 import { create } from "domain";
 import { z } from "zod";
+import ErrorMessage from "@/app/components/ErrorMessage";
 
 type IssueForm = z.infer<typeof createIssueSchema>;
 
@@ -46,7 +47,9 @@ const NewIssuePage = () => {
         <TextField.Root>
           <TextField.Input {...register("title")} placeholder="Title" />
         </TextField.Root>
-        {errors.title && <Text color="red" as="p">{errors.title.message}</Text>}
+
+        <ErrorMessage>{errors.title?.message}</ErrorMessage>
+
         <Controller
           control={control}
           name="description"
@@ -54,9 +57,9 @@ const NewIssuePage = () => {
             <SimpleMDE placeholder="Description" {...field} />
           )}
         />
-        {errors.description && (
-          <Text color="red" as="p">{errors.description.message}</Text>
-        )}
+
+        <ErrorMessage>{errors.description?.message}</ErrorMessage>
+
         <Button>Submit New Issue</Button>
       </form>
     </div>
