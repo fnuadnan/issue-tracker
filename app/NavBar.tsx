@@ -6,14 +6,7 @@ import { AiFillBug } from "react-icons/ai";
 import classNames from "classnames";
 import { usePathname } from "next/navigation";
 import { useSession } from "next-auth/react";
-import {
-  Avatar,
-  Box,
-  Container,
-  DropdownMenu,
-  Flex,
-  Text,
-} from "@radix-ui/themes";
+import {Avatar,Box,Container,DropdownMenu,Flex,Text,} from "@radix-ui/themes";
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
 
