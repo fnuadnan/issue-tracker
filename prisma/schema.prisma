@@ -7,7 +7,7 @@ generator client {
 
 datasource db {
   provider     = "mysql"
-  url          = "mysql://root:Maimouna123@localhost:3306/issue-tracker"
+  url          = env("DATABASE_URL")
   relationMode = "prisma"
 }
 
