@@ -8,7 +8,7 @@ import router from "./routes";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <Theme>
+    <Theme accentColor="violet">
       <RouterProvider router={router} />
     </Theme>
   </React.StrictMode>
