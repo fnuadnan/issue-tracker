@@ -6,19 +6,19 @@ import { useNavigate } from "react-router-dom";
 import SimpleMDE from "react-simplemde-editor";
 import ErrorMessage from "../components/ErrorMessage";
 import Spinner from "../components/Spinner";
-import { IssueForm } from "../entities/entities";
+import { NewIssueForm } from "../entities/entities";
 import useIssues from "../hooks/useIssues";
 import { validateIssue } from "../utils/validationSchema";
 
 const NewIssuePage = () => {
   const navigate = useNavigate(); // Initialize useNavigate
 
-  const { register, control, handleSubmit, reset, formState: { errors }} = useForm<IssueForm>({
+  const { register, control, handleSubmit, reset, formState: { errors }} = useForm<NewIssueForm>({
     resolver: zodResolver(validateIssue),
   });
   const { handleSend, error, loading } = useIssues();
 
-  const onSubmit = async (data: IssueForm) => {
+  const onSubmit = async (data: NewIssueForm) => {
     const success = await handleSend(data);
     if (success) {
       reset();

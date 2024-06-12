@@ -1,14 +1,32 @@
-import { useState } from "react";
-import { IssueForm } from "../entities/entities";
+import { useEffect, useState } from "react";
+import { IssueForm, NewIssueForm } from "../entities/entities";
 import APIClient from "../services/api-client";
 
 const apiclient = new APIClient<IssueForm>("/issues");
 
 const useIssues = () => {
+  const [issues, setIssues] = useState<IssueForm[]>([]);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const handleSend = async (input: IssueForm) => {
+  // get issues on component mount
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        setLoading(true);
+        const data = await apiclient.get();
+        setIssues(data);
+        setLoading(false);
+      } catch (error) {
+        setLoading(false);
+        setError("An unexpected error occurred.");
+      }
+    };
+    fetchData();
+  }, []);
+
+  // post issue form data
+  const handleSend = async (input: NewIssueForm) => {
     try {
       setLoading(true);
       await apiclient.post(input);
@@ -21,7 +39,7 @@ const useIssues = () => {
     }
   };
 
-  return { loading, handleSend, error };
+  return { loading, handleSend, error, issues };
 };
 
 export default useIssues;
