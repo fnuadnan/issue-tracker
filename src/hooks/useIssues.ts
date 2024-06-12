@@ -6,17 +6,22 @@ const apiclient = new APIClient<IssueForm>("/issues");
 
 const useIssues = () => {
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleSend = async (input: IssueForm) => {
     try {
+      setLoading(true);
       await apiclient.post(input);
+      setLoading(false);
+      return true; // Indicate success
     } catch (error) {
+      setLoading(false);
       setError("An unexpected error occurred.");
-      throw error;
+      return false; // Indicate failure
     }
   };
 
-  return { handleSend, error };
+  return { loading, handleSend, error };
 };
 
 export default useIssues;

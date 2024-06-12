@@ -2,13 +2,17 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Button, Callout, TextField } from "@radix-ui/themes";
 import "easymde/dist/easymde.min.css";
 import { Controller, useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 import SimpleMDE from "react-simplemde-editor";
 import ErrorMessage from "../components/ErrorMessage";
+import Spinner from "../components/Spinner";
 import { IssueForm } from "../entities/entities";
 import useIssues from "../hooks/useIssues";
 import { validateIssue } from "../utils/validationSchema";
 
 const NewIssuePage = () => {
+  const navigate = useNavigate(); // Initialize useNavigate
+
   const {
     register,
     control,
@@ -18,11 +22,14 @@ const NewIssuePage = () => {
   } = useForm<IssueForm>({
     resolver: zodResolver(validateIssue),
   });
-  const { handleSend, error } = useIssues();
+  const { handleSend, error, loading } = useIssues();
 
-  const onSubmit = (data: IssueForm) => {
-    handleSend(data);
-    reset();
+  const onSubmit = async (data: IssueForm) => {
+    const success = await handleSend(data);
+    if (success) {
+      reset();
+      navigate("/"); // Navigate to the dashboard page
+    }
   };
 
   return (
@@ -46,7 +53,9 @@ const NewIssuePage = () => {
           )}
         />
         <ErrorMessage>{errors.description?.message}</ErrorMessage>
-        <Button>Submit New Issue</Button>
+        <Button disabled={loading}>
+          Submit New Issue {loading && <Spinner />}
+        </Button>
       </form>
     </div>
   );
