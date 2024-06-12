@@ -2,7 +2,7 @@ export interface IssueForm {
   id: string;
   title: string;
   description: string;
-  status: string;
+  status: "OPEN" | "CLOSED" | "IN_PROGRESS";
   createdAt: Date;
 }
 
