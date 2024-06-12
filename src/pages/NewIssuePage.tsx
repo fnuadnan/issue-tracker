@@ -13,13 +13,7 @@ import { validateIssue } from "../utils/validationSchema";
 const NewIssuePage = () => {
   const navigate = useNavigate(); // Initialize useNavigate
 
-  const {
-    register,
-    control,
-    handleSubmit,
-    reset,
-    formState: { errors },
-  } = useForm<IssueForm>({
+  const { register, control, handleSubmit, reset, formState: { errors }} = useForm<IssueForm>({
     resolver: zodResolver(validateIssue),
   });
   const { handleSend, error, loading } = useIssues();
@@ -40,22 +34,17 @@ const NewIssuePage = () => {
         </Callout.Root>
       )}
       <form className=" space-y-3" onSubmit={handleSubmit(onSubmit)}>
-        <TextField.Root
-          {...register("title")}
-          placeholder="Title"
-        ></TextField.Root>
+        <TextField.Root {...register("title")}  placeholder="Title"></TextField.Root>
         <ErrorMessage>{errors.title?.message}</ErrorMessage>
-        <Controller
-          name="description"
+        <Controller 
+          name="description" 
           control={control}
           render={({ field }) => (
             <SimpleMDE placeholder="Description" {...field} />
           )}
         />
         <ErrorMessage>{errors.description?.message}</ErrorMessage>
-        <Button disabled={loading}>
-          Submit New Issue {loading && <Spinner />}
-        </Button>
+        <Button disabled={loading}> Submit New Issue {loading && <Spinner />} </Button>
       </form>
     </div>
   );
