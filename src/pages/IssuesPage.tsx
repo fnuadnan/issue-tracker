@@ -2,10 +2,10 @@ import { Table } from "@radix-ui/themes";
 import IssueActions from "../components/IssueActions";
 import IssueStatusBadge from "../components/IssueStatusBadge";
 import LoadingIssuesPage from "../components/LoadingIssuesPage";
-import useIssues from "../hooks/useIssues";
+import useFetchIssues from "../hooks/useFetchIssues";
 
 const IssuesPage = () => {
-  const { issues, loading } = useIssues();
+  const { issues, loading } = useFetchIssues();
 
   if (loading) {
     return <LoadingIssuesPage />;

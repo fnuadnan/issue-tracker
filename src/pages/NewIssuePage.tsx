@@ -7,16 +7,22 @@ import SimpleMDE from "react-simplemde-editor";
 import ErrorMessage from "../components/ErrorMessage";
 import Spinner from "../components/Spinner";
 import { NewIssueForm } from "../entities/entities";
-import useIssues from "../hooks/useIssues";
+import usePostIssue from "../hooks/usePostIssue";
 import { validateIssue } from "../utils/validationSchema";
 
 const NewIssuePage = () => {
   const navigate = useNavigate(); // Initialize useNavigate
 
-  const { register, control, handleSubmit, reset, formState: { errors }} = useForm<NewIssueForm>({
+  const {
+    register,
+    control,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm<NewIssueForm>({
     resolver: zodResolver(validateIssue),
   });
-  const { handleSend, error, loading } = useIssues();
+  const { handleSend, error, loading } = usePostIssue();
 
   const onSubmit = async (data: NewIssueForm) => {
     const success = await handleSend(data);
@@ -34,17 +40,23 @@ const NewIssuePage = () => {
         </Callout.Root>
       )}
       <form className=" space-y-3" onSubmit={handleSubmit(onSubmit)}>
-        <TextField.Root {...register("title")}  placeholder="Title"></TextField.Root>
+        <TextField.Root
+          {...register("title")}
+          placeholder="Title"
+        ></TextField.Root>
         <ErrorMessage>{errors.title?.message}</ErrorMessage>
-        <Controller 
-          name="description" 
+        <Controller
+          name="description"
           control={control}
           render={({ field }) => (
             <SimpleMDE placeholder="Description" {...field} />
           )}
         />
         <ErrorMessage>{errors.description?.message}</ErrorMessage>
-        <Button disabled={loading}> Submit New Issue {loading && <Spinner />} </Button>
+        <Button disabled={loading}>
+          {" "}
+          Submit New Issue {loading && <Spinner />}{" "}
+        </Button>
       </form>
     </div>
   );
