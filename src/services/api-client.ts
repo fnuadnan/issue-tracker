@@ -22,6 +22,16 @@ class APIClient<T> {
     }
   };
 
+  getById = async (id: string) => {
+    try {
+      const res = await axiosIntance.get<T>(this.endpoint + "/" + id);
+      return res.data;
+    } catch (error) {
+      console.error("APIClient getById error:", error);
+      throw error;
+    }
+  };
+
   post = async (inputs: NewIssueForm) => {
     try {
       const res = await axiosIntance.post<T>(this.endpoint + "/", inputs);

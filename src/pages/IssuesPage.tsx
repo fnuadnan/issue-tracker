@@ -1,4 +1,5 @@
 import { Table } from "@radix-ui/themes";
+import { Link } from "react-router-dom";
 import IssueActions from "../components/IssueActions";
 import IssueStatusBadge from "../components/IssueStatusBadge";
 import LoadingIssuesPage from "../components/LoadingIssuesPage";
@@ -30,7 +31,7 @@ const IssuesPage = () => {
           {issues.map((issue) => (
             <Table.Row key={issue.id}>
               <Table.Cell>
-                {issue.title}
+                <Link to={`/issues/${issue.id}`}>{issue.title}</Link>
                 <div className="block md:hidden">
                   <IssueStatusBadge status={issue.status} />
                 </div>
