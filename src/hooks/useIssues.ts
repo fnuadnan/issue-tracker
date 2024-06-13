@@ -1,3 +1,4 @@
+import delay from "delay";
 import { useEffect, useState } from "react";
 import { IssueForm, NewIssueForm } from "../entities/entities";
 import APIClient from "../services/api-client";
@@ -15,6 +16,7 @@ const useIssues = () => {
       try {
         setLoading(true);
         const data = await apiclient.get();
+        await delay(3000);
         setIssues(data);
         setLoading(false);
       } catch (error) {

@@ -1,15 +1,10 @@
 import { Table } from "@radix-ui/themes";
-import IssueActions from "../components/IssueActions";
-import IssueStatusBadge from "../components/IssueStatusBadge";
-import LoadingIssuesPage from "../components/LoadingIssuesPage";
-import useIssues from "../hooks/useIssues";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
+import IssueActions from "./IssueActions";
 
-const IssuesPage = () => {
-  const { issues, loading } = useIssues();
-
-  if (loading) {
-    return <LoadingIssuesPage />;
-  }
+const LoadingIssuesPage = () => {
+  const issues = [1, 2, 3, 4, 5];
 
   return (
     <div>
@@ -28,18 +23,18 @@ const IssuesPage = () => {
         </Table.Header>
         <Table.Body>
           {issues.map((issue) => (
-            <Table.Row key={issue.id}>
+            <Table.Row key={issue}>
               <Table.Cell>
-                {issue.title}
+                <Skeleton />
                 <div className="block md:hidden">
-                  <IssueStatusBadge status={issue.status} />
+                  <Skeleton />
                 </div>
               </Table.Cell>
               <Table.Cell className="hidden md:table-cell">
-                <IssueStatusBadge status={issue.status} />
+                <Skeleton />
               </Table.Cell>
               <Table.Cell className="hidden md:table-cell">
-                {new Date(issue.createdAt).toDateString()}
+                <Skeleton />
               </Table.Cell>
             </Table.Row>
           ))}
@@ -49,4 +44,4 @@ const IssuesPage = () => {
   );
 };
 
-export default IssuesPage;
+export default LoadingIssuesPage;
