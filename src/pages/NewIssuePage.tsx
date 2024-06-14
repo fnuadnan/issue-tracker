@@ -28,7 +28,7 @@ const NewIssuePage = () => {
     const success = await handleSend(data);
     if (success) {
       reset();
-      navigate("/"); // Navigate to the dashboard page
+      navigate("/issues"); // Navigate to the dashboard page
     }
   };
 
