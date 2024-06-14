@@ -32,10 +32,6 @@ const NewIssuePage = () => {
     }
   };
 
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-
   return (
     <div className="max-w-xl">
       {error && (

@@ -1,4 +1,4 @@
- import { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { IssueForm } from "../entities/entities";
 import APIClient from "../services/api-client";
 

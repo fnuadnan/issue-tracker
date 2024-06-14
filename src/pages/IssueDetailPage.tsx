@@ -1,13 +1,14 @@
 import { Card, Flex, Heading, Text } from "@radix-ui/themes";
 import ReactMarkdown from "react-markdown";
 import IssueStatusBadge from "../components/IssueStatusBadge";
+import LoadingIssueDetailPage from "../components/LoadingIssueDetailPage";
 import useFetchIssueDetail from "../hooks/useFetchIssueDetail";
 
 const IssueDetailPage = () => {
   const { issue, loading } = useFetchIssueDetail();
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <LoadingIssueDetailPage />;
   }
 
   if (!issue) {
