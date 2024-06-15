@@ -7,7 +7,7 @@ import SimpleMDE from "react-simplemde-editor";
 import ErrorMessage from "../components/ErrorMessage";
 import Spinner from "../components/Spinner";
 import { IssueFormData, NewIssueForm } from "../entities/entities";
-import usePostIssue from "../hooks/usePostIssue";
+import useIssue from "../hooks/useIssue";
 import { validateIssue } from "../utils/validationSchema";
 
 const IssueForm = ({ issue }: { issue?: IssueFormData }) => {
@@ -22,13 +22,21 @@ const IssueForm = ({ issue }: { issue?: IssueFormData }) => {
   } = useForm<NewIssueForm>({
     resolver: zodResolver(validateIssue),
   });
-  const { handleSend, error, loading } = usePostIssue();
+
+  const { handleSend, updateIssue, loading, error } = useIssue(); // Unified hook for handling issues
 
   const onSubmit = async (data: NewIssueForm) => {
-    const success = await handleSend(data);
-    if (success) {
-      reset();
-      navigate("/issues"); // Navigate to the dashboard page
+    if (issue) {
+      const success = await updateIssue(data);
+      if (success) {
+        navigate("/issues"); // Navigate to the dashboard page
+      }
+    } else {
+      const success = await handleSend(data);
+      if (success) {
+        reset();
+        navigate("/issues"); // Navigate to the dashboard page
+      }
     }
   };
 
@@ -56,8 +64,8 @@ const IssueForm = ({ issue }: { issue?: IssueFormData }) => {
         />
         <ErrorMessage>{errors.description?.message}</ErrorMessage>
         <Button disabled={loading}>
-          {" "}
-          Submit New Issue {loading && <Spinner />}{" "}
+          {issue ? "Update Issue" : "Submit New Issue"}
+          {loading && <Spinner />}{" "}
         </Button>
       </form>
     </div>

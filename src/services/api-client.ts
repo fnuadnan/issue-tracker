@@ -41,6 +41,16 @@ class APIClient<T> {
       throw error;
     }
   };
+
+  patch = async (id: string, inputs: NewIssueForm) => {
+    try {
+      const res = await axiosIntance.patch<T>(this.endpoint + "/" + id, inputs);
+      return res.data;
+    } catch (error) {
+      console.error("APIClient patch error:", error);
+      throw error;
+    }
+  };
 }
 
 export default APIClient;
