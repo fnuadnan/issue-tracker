@@ -2,6 +2,7 @@ import { Pencil2Icon } from "@radix-ui/react-icons";
 import { Box, Button, Card, Flex, Grid, Heading, Text } from "@radix-ui/themes";
 import ReactMarkdown from "react-markdown";
 import { Link } from "react-router-dom";
+import DeleteIssueButton from "../components/DeleteIssueButton";
 import IssueStatusBadge from "../components/IssueStatusBadge";
 import LoadingIssueDetailPage from "../components/LoadingIssueDetailPage";
 import useFetchIssueDetail from "../hooks/useFetchIssueDetail";
@@ -18,8 +19,8 @@ const IssueDetailPage = () => {
   }
 
   return (
-    <Grid columns={{ initial: "1", md: "2" }} gap="5">
-      <Box>
+    <Grid columns={{ initial: "1", sm: "5" }} gap="5">
+      <Box className="md:col-span-4">
         <Heading>{issue.title}</Heading>
         <Flex gap="3" my="2">
           <IssueStatusBadge status={issue.status} />
@@ -30,10 +31,13 @@ const IssueDetailPage = () => {
         </Card>
       </Box>
       <Box>
-        <Button>
-          <Pencil2Icon />
-          <Link to={`/issues/${issue.id}/edit`}>Edit Issue</Link>
-        </Button>
+        <Flex gap="4" direction="column">
+          <Button>
+            <Pencil2Icon />
+            <Link to={`/issues/${issue.id}/edit`}>Edit Issue</Link>
+          </Button>
+          <DeleteIssueButton issueId={issue.id} />
+        </Flex>
       </Box>
     </Grid>
   );
