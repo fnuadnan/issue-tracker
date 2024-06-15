@@ -1,7 +1,60 @@
-import { Button } from "@radix-ui/themes";
+import { AlertDialog, Button, Flex } from "@radix-ui/themes";
 
 const DeleteIssueButton = ({ issueId }: { issueId: string }) => {
-  return <Button color="red">Delete Issue</Button>;
+  return (
+    <AlertDialog.Root>
+      <AlertDialog.Trigger>
+        <Button color="red">Delete Issue</Button>
+      </AlertDialog.Trigger>
+      <AlertDialog.Content>
+        <AlertDialog.Title>Confirm Deletion</AlertDialog.Title>
+        <AlertDialog.Description>
+          Are you sure you want to delete this issue? This action cannot be
+          undone.
+        </AlertDialog.Description>
+        <Flex gap="3" mt="4" justify="end">
+          <AlertDialog.Cancel>
+            <Button variant="soft" color="gray">
+              Cancel
+            </Button>
+          </AlertDialog.Cancel>
+          <AlertDialog.Action>
+            <Button variant="solid" color="red">
+              Delete Issue
+            </Button>
+          </AlertDialog.Action>
+        </Flex>
+      </AlertDialog.Content>
+    </AlertDialog.Root>
+  );
 };
 
 export default DeleteIssueButton;
+
+{
+  /* <AlertDialog.Root>
+  <AlertDialog.Trigger>
+    <Button color="red">Revoke access</Button>
+  </AlertDialog.Trigger>
+  <AlertDialog.Content maxWidth="450px">
+    <AlertDialog.Title>Revoke access</AlertDialog.Title>
+    <AlertDialog.Description size="2">
+      Are you sure? This application will no longer be accessible and any
+      existing sessions will be expired.
+    </AlertDialog.Description>
+
+    <Flex gap="3" mt="4" justify="end">
+      <AlertDialog.Cancel>
+        <Button variant="soft" color="gray">
+          Cancel
+        </Button>
+      </AlertDialog.Cancel>
+      <AlertDialog.Action>
+        <Button variant="solid" color="red">
+          Revoke access
+        </Button>
+      </AlertDialog.Action>
+    </Flex>
+  </AlertDialog.Content>
+</AlertDialog.Root> */
+}
