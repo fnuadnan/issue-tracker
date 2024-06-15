@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { IssueForm } from "../entities/entities";
+import { IssueFormData } from "../entities/entities";
 import APIClient from "../services/api-client";
 
-const apiClient = new APIClient<IssueForm>("/issues");
+const apiClient = new APIClient<IssueFormData>("/issues");
 
 const useFetchIssueDetail = () => {
   const { id } = useParams<{ id: string }>();
-  const [issue, setIssue] = useState<IssueForm | null>(null);
+  const [issue, setIssue] = useState<IssueFormData | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 

@@ -1,4 +1,4 @@
-export interface IssueForm {
+export interface IssueFormData {
   id: string;
   title: string;
   description: string;

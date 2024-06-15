@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { IssueForm, NewIssueForm } from "../entities/entities";
+import { IssueFormData, NewIssueForm } from "../entities/entities";
 import APIClient from "../services/api-client";
 
-const apiclient = new APIClient<IssueForm>("/issues");
+const apiclient = new APIClient<IssueFormData>("/issues");
 
 const useIssues = () => {
   const [error, setError] = useState("");

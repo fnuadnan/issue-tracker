@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
-import { IssueForm } from "../entities/entities";
+import { IssueFormData } from "../entities/entities";
 import APIClient from "../services/api-client";
 
-const apiClient = new APIClient<IssueForm>("/issues");
+const apiClient = new APIClient<IssueFormData>("/issues");
 
 const useFetchIssues = () => {
-  const [issues, setIssues] = useState<IssueForm[]>([]);
+  const [issues, setIssues] = useState<IssueFormData[]>([]);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 

@@ -1,5 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import DashBoard from "./components/DashBoard";
+import EditIssuePage from "./pages/EditIssuePage";
 import IssueDetailPage from "./pages/IssueDetailPage";
 import IssuesPage from "./pages/IssuesPage";
 import Layout from "./pages/Layout";
@@ -14,6 +15,7 @@ const router = createBrowserRouter([
       { path: "issues", element: <IssuesPage /> },
       { path: "issues/new", element: <NewIssuePage /> },
       { path: "issues/:id", element: <IssueDetailPage /> },
+      { path: "issues/:id/edit", element: <EditIssuePage /> },
     ],
   },
 ]);
