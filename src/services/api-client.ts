@@ -12,6 +12,7 @@ class APIClient<T> {
     this.endpoint = endpoint;
   }
 
+  // get all issues
   get = async () => {
     try {
       const res = await axiosIntance.get<T[]>(this.endpoint);
@@ -22,6 +23,7 @@ class APIClient<T> {
     }
   };
 
+  // get issue by id
   getById = async (id: string) => {
     try {
       const res = await axiosIntance.get<T>(this.endpoint + "/" + id);
@@ -32,6 +34,7 @@ class APIClient<T> {
     }
   };
 
+  // post new issue
   post = async (inputs: NewIssueForm) => {
     try {
       const res = await axiosIntance.post<T>(this.endpoint + "/", inputs);
@@ -42,12 +45,24 @@ class APIClient<T> {
     }
   };
 
+  // update issue by id
   patch = async (id: string, inputs: NewIssueForm) => {
     try {
       const res = await axiosIntance.patch<T>(this.endpoint + "/" + id, inputs);
       return res.data;
     } catch (error) {
       console.error("APIClient patch error:", error);
+      throw error;
+    }
+  };
+
+  // delete issue by id
+  delete = async (id: string) => {
+    try {
+      const res = await axiosIntance.delete<T>(this.endpoint + "/" + id);
+      return res.data;
+    } catch (error) {
+      console.error("APIClient delete error:", error);
       throw error;
     }
   };
