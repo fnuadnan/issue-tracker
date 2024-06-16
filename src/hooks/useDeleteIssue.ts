@@ -6,11 +6,11 @@ const apiClient = new APIClient<IssueFormData>("/issues");
 
 const useDeleteIssue = () => {
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
+  const [error, setError] = useState(false);
 
   const deleteIssue = async (id: string) => {
     if (!id) {
-      setError("Invalid issue ID.");
+      setError(true);
       return false; // Indicate failure
     }
     try {
@@ -20,11 +20,11 @@ const useDeleteIssue = () => {
       return true; // Indicate success
     } catch (error) {
       setLoading(false);
-      setError("An unexpected error occurred.");
+      setError(true);
       return false; // Indicate failure
     }
   };
-  return { deleteIssue, loading, error };
+  return { deleteIssue, loading, error, setError };
 };
 
 export default useDeleteIssue;
