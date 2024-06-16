@@ -5,8 +5,8 @@ import APIClient from "../services/api-client";
 const apiClient = new APIClient<IssueFormData>("/issues");
 
 const useDeleteIssue = () => {
-  const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
 
   const deleteIssue = async (id: string) => {
     if (!id) {
@@ -14,17 +14,17 @@ const useDeleteIssue = () => {
       return false; // Indicate failure
     }
     try {
-      setLoading(true);
+      setIsDeleting(true);
       await apiClient.delete(id);
-      setLoading(false);
+      setIsDeleting(false);
       return true; // Indicate success
     } catch (error) {
-      setLoading(false);
+      setIsDeleting(false);
       setError(true);
       return false; // Indicate failure
     }
   };
-  return { deleteIssue, loading, error, setError };
+  return { deleteIssue, isDeleting, error, setError };
 };
 
 export default useDeleteIssue;

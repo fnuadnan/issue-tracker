@@ -1,9 +1,9 @@
-import { AlertDialog, Button, Flex } from "@radix-ui/themes";
+import { AlertDialog, Button, Flex, Spinner } from "@radix-ui/themes";
 import { useNavigate } from "react-router-dom";
 import useDeleteIssue from "../hooks/useDeleteIssue";
 
 const DeleteIssueButton = ({ issueId }: { issueId: string }) => {
-  const { deleteIssue, error, setError } = useDeleteIssue(); // Import the custom hook
+  const { deleteIssue, error, setError, isDeleting } = useDeleteIssue(); // Import the custom hook
 
   // Handle the deletion of the issue
   const handleDeleteIssue = async () => {
@@ -20,7 +20,10 @@ const DeleteIssueButton = ({ issueId }: { issueId: string }) => {
     <>
       <AlertDialog.Root>
         <AlertDialog.Trigger>
-          <Button color="red">Delete Issue</Button>
+          <Button disabled={isDeleting} color="red">
+            Delete Issue
+            {isDeleting && <Spinner />}
+          </Button>
         </AlertDialog.Trigger>
         <AlertDialog.Content>
           <AlertDialog.Title>Confirm Deletion</AlertDialog.Title>
