@@ -1,6 +1,7 @@
-import { Box, Container, Flex } from "@radix-ui/themes";
+import { Container, Flex } from "@radix-ui/themes";
 import { FaBug } from "react-icons/fa";
 import { Link, NavLink } from "react-router-dom";
+import AuthButton from "./AuthButton";
 
 const NavBar = () => {
   const links = [
@@ -36,11 +37,12 @@ const NavBar = () => {
             </ul>
           </Flex>
           <Flex>
-            {" "}
+            {/* {" "}
             <Box>
               {status === "authenticated" && <Link to="/logout">Logout</Link>}
               {status === "unauthenticated" && <Link to="/signin">Login</Link>}
-            </Box>
+            </Box> */}
+            <AuthButton />
           </Flex>
         </Flex>
       </Container>

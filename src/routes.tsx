@@ -5,6 +5,7 @@ import IssueDetailPage from "./pages/IssueDetailPage";
 import IssuesPage from "./pages/IssuesPage";
 import Layout from "./pages/Layout";
 import NewIssuePage from "./pages/NewIssuePage";
+import PrivateRoutes from "./pages/PrivateRoutes";
 
 const router = createBrowserRouter([
   {
@@ -12,7 +13,11 @@ const router = createBrowserRouter([
     element: <Layout />,
     children: [
       { index: true, element: <DashBoard /> },
-      { path: "issues", element: <IssuesPage /> },
+      {
+        path: "issues",
+        element: <PrivateRoutes />,
+        children: [{ index: true, element: <IssuesPage /> }],
+      },
       { path: "issues/new", element: <NewIssuePage /> },
       { path: "issues/:id", element: <IssueDetailPage /> },
       { path: "issues/:id/edit", element: <EditIssuePage /> },

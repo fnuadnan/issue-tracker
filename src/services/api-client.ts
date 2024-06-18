@@ -1,8 +1,9 @@
 import axios from "axios";
-import { NewIssueForm } from "../entities/entities";
+import { NewIssueForm, UserData } from "../entities/entities";
 
 const axiosIntance = axios.create({
   baseURL: "http://localhost:3000",
+  withCredentials: true, // Ensure cookies are included in cross-site requests
 });
 
 class APIClient<T> {
@@ -63,6 +64,28 @@ class APIClient<T> {
       return res.data;
     } catch (error) {
       console.error("APIClient delete error:", error);
+      throw error;
+    }
+  };
+
+  // generate token
+  generateToken = async (userData: UserData) => {
+    try {
+      const res = await axiosIntance.post<T>("/generate-token", userData);
+      return res.data;
+    } catch (error) {
+      console.error("APIClient generateToken error:", error);
+      throw error;
+    }
+  };
+
+  // handle logout
+  logout = async () => {
+    try {
+      const res = await axiosIntance.post<{ message: string }>("/logout");
+      return res.data;
+    } catch (error) {
+      console.error("APIClient logout error:", error);
       throw error;
     }
   };

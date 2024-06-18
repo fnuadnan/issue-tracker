@@ -10,3 +10,10 @@ export interface NewIssueForm {
   title: string;
   description: string;
 }
+
+export interface UserData {
+  user_id: string;
+  name: string;
+  email: string;
+  picture: string;
+}
