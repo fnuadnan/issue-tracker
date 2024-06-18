@@ -1,4 +1,5 @@
 import { useAuth0 } from "@auth0/auth0-react";
+import { Avatar, DropdownMenu, Text } from "@radix-ui/themes";
 import { useEffect } from "react";
 import { UserData } from "../entities/entities";
 import APIClient from "../services/api-client";
@@ -39,7 +40,25 @@ const AuthButton = () => {
   return (
     <div>
       {isAuthenticated ? (
-        <button onClick={handleLogout}>Log Out</button>
+        <DropdownMenu.Root>
+          <DropdownMenu.Trigger>
+            <Avatar
+              className="cursor-pointer"
+              src={user?.picture}
+              fallback="?"
+              size="2"
+              radius="full"
+            />
+          </DropdownMenu.Trigger>
+          <DropdownMenu.Content>
+            <DropdownMenu.Label>
+              <Text size="2">{user?.email}</Text>
+            </DropdownMenu.Label>
+            <DropdownMenu.Item onClick={handleLogout}>
+              Log Out
+            </DropdownMenu.Item>
+          </DropdownMenu.Content>
+        </DropdownMenu.Root>
       ) : (
         <button onClick={() => loginWithRedirect()}>Log In</button>
       )}

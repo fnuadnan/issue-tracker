@@ -1,4 +1,4 @@
-import { Container, Flex } from "@radix-ui/themes";
+import { Box, Container, Flex } from "@radix-ui/themes";
 import { FaBug } from "react-icons/fa";
 import { Link, NavLink } from "react-router-dom";
 import AuthButton from "./AuthButton";
@@ -8,8 +8,6 @@ const NavBar = () => {
     { label: "Dashboard", to: "/" },
     { label: "Issues", to: "/issues" },
   ];
-
-  const status = "authenticated";
 
   return (
     <nav className="border-b mb-5 px-5 py-3">
@@ -37,12 +35,9 @@ const NavBar = () => {
             </ul>
           </Flex>
           <Flex>
-            {/* {" "}
             <Box>
-              {status === "authenticated" && <Link to="/logout">Logout</Link>}
-              {status === "unauthenticated" && <Link to="/signin">Login</Link>}
-            </Box> */}
-            <AuthButton />
+              <AuthButton />
+            </Box>
           </Flex>
         </Flex>
       </Container>
