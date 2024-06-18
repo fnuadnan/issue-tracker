@@ -1,11 +1,14 @@
 import { useAuth0 } from "@auth0/auth0-react";
 import { Avatar, DropdownMenu, Text } from "@radix-ui/themes";
 import { useEffect } from "react";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 import { UserData } from "../entities/entities";
 import APIClient from "../services/api-client";
 
 const AuthButton = () => {
-  const { loginWithRedirect, logout, isAuthenticated, user } = useAuth0();
+  const { loginWithRedirect, logout, isAuthenticated, user, isLoading } =
+    useAuth0();
   const apiClient = new APIClient<UserData>("");
 
   useEffect(() => {
@@ -27,6 +30,8 @@ const AuthButton = () => {
 
     generateCustomToken();
   }, [isAuthenticated, user]);
+
+  if (isLoading) return <Skeleton width="3rem" />;
 
   const handleLogout = async () => {
     try {
