@@ -60,7 +60,9 @@ const AuthButton = () => {
           </DropdownMenu.Content>
         </DropdownMenu.Root>
       ) : (
-        <button onClick={() => loginWithRedirect()}>Log In</button>
+        <button className="nav-link" onClick={() => loginWithRedirect()}>
+          Log In
+        </button>
       )}
     </div>
   );

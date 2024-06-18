@@ -1,14 +1,9 @@
-import { Box, Container, Flex } from "@radix-ui/themes";
+import { Container, Flex } from "@radix-ui/themes";
 import { FaBug } from "react-icons/fa";
 import { Link, NavLink } from "react-router-dom";
 import AuthButton from "./AuthButton";
 
 const NavBar = () => {
-  const links = [
-    { label: "Dashboard", to: "/" },
-    { label: "Issues", to: "/issues" },
-  ];
-
   return (
     <nav className="border-b mb-5 px-5 py-3">
       <Container>
@@ -17,31 +12,37 @@ const NavBar = () => {
             <Link to="/">
               <FaBug />
             </Link>
-            <ul className="flex space-x-6">
-              {links.map((link, index) => (
-                <li key={index}>
-                  <NavLink
-                    className={({ isActive }) =>
-                      isActive
-                        ? "text-zinc-900"
-                        : "text-zinc-500 hover:text-zinc-800 transition-colors"
-                    }
-                    to={link.to}
-                  >
-                    {link.label}
-                  </NavLink>
-                </li>
-              ))}
-            </ul>
+            <Navlinks />
           </Flex>
-          <Flex>
-            <Box>
-              <AuthButton />
-            </Box>
-          </Flex>
+          <AuthButton />
         </Flex>
       </Container>
     </nav>
+  );
+};
+
+const Navlinks = () => {
+  const links = [
+    { label: "Dashboard", to: "/" },
+    { label: "Issues", to: "/issues" },
+  ];
+  return (
+    <ul className="flex space-x-6">
+      {links.map((link, index) => (
+        <li key={index}>
+          <NavLink
+            className={({ isActive }) =>
+              isActive
+                ? "text-zinc-900"
+                : "text-zinc-500 hover:text-zinc-800 transition-colors"
+            }
+            to={link.to}
+          >
+            {link.label}
+          </NavLink>
+        </li>
+      ))}
+    </ul>
   );
 };
 
