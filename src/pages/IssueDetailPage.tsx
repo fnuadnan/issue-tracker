@@ -2,6 +2,7 @@ import { Pencil2Icon } from "@radix-ui/react-icons";
 import { Box, Button, Card, Flex, Grid, Heading, Text } from "@radix-ui/themes";
 import ReactMarkdown from "react-markdown";
 import { Link } from "react-router-dom";
+import AssigneeSelect from "../components/AssigneeSelect";
 import DeleteIssueButton from "../components/DeleteIssueButton";
 import IssueStatusBadge from "../components/IssueStatusBadge";
 import LoadingIssueDetailPage from "../components/LoadingIssueDetailPage";
@@ -32,6 +33,7 @@ const IssueDetailPage = () => {
       </Box>
       <Box>
         <Flex gap="4" direction="column">
+          <AssigneeSelect />
           <Button>
             <Pencil2Icon />
             <Link to={`/issues/${issue.id}/edit`}>Edit Issue</Link>
