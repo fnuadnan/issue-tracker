@@ -13,6 +13,17 @@ class APIClient<T> {
     this.endpoint = endpoint;
   }
 
+  // get all users
+  getUsers = async () => {
+    try {
+      const res = await axiosIntance.get<T[]>(this.endpoint);
+      return res.data;
+    } catch (error) {
+      console.error("APIClient getUsers error:", error);
+      throw error;
+    }
+  };
+
   // get all issues
   get = async () => {
     try {
