@@ -4,11 +4,13 @@ export interface IssueFormData {
   description: string;
   status: "OPEN" | "CLOSED" | "IN_PROGRESS";
   createdAt: Date;
+  assignedToUserId?: string | null;
 }
 
 export interface NewIssueForm {
   title: string;
   description: string;
+  assignedToUserId?: string | null;
 }
 
 export interface UserData {

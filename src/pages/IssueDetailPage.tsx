@@ -33,7 +33,7 @@ const IssueDetailPage = () => {
       </Box>
       <Box>
         <Flex gap="4" direction="column">
-          <AssigneeSelect />
+          <AssigneeSelect issue={issue} />
           <Button>
             <Pencil2Icon />
             <Link to={`/issues/${issue.id}/edit`}>Edit Issue</Link>
