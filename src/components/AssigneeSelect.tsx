@@ -1,8 +1,15 @@
 import { Select } from "@radix-ui/themes";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
+
 import useUsers from "../hooks/useUsers";
 
 const AssigneeSelect = () => {
-  const { users } = useUsers();
+  const { users, error, loading } = useUsers();
+
+  if (loading) return <Skeleton />;
+
+  if (error) return null;
 
   return (
     <Select.Root>
