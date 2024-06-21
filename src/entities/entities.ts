@@ -5,6 +5,7 @@ export interface IssueFormData {
   status: "OPEN" | "CLOSED" | "IN_PROGRESS";
   createdAt: Date;
   assignedToUserId?: string | null;
+  assignedTo: any; // come back do this User | null
 }
 
 export interface NewIssueForm {

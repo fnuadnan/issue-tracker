@@ -1,5 +1,7 @@
+import LatestIssues from "./LatestIssues";
+
 const DashBoard = () => {
-  return <div>DashBoard</div>;
+  return <LatestIssues />;
 };
 
 export default DashBoard;

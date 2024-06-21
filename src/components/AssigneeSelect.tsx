@@ -17,7 +17,7 @@ const AssigneeSelect = ({ issue }: { issue: IssueFormData }) => {
   return (
     <>
       <Select.Root
-        defaultValue={issue.assignedToUserId || " "} // if we dont have a user id, set to empty string to show placeholder  text
+        defaultValue={issue.assignedToUserId || ""} // if we dont have a user id, set to empty string to show placeholder  text
         onValueChange={(userId: string | null) => {
           if (!userId || userId === " ") userId = null; // if we dont have a user id or string is empty, set to null
           updateIssue({ ...issue, assignedToUserId: userId }); // update the issue with the new user id
