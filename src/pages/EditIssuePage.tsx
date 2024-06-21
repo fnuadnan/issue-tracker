@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";
 import IssueForm from "../components/IssueForm";
 import useFetchIssueDetail from "../hooks/useFetchIssueDetail";
 
@@ -12,7 +13,19 @@ const EditIssuePage = () => {
     return <div>Issue not found.</div>;
   }
 
-  return <IssueForm issue={issue} />;
+  return (
+    <>
+      <Helmet>
+        <title>Edit Issue: {issue.title}</title>
+        <meta
+          name="description"
+          content={`Editing issue: ${issue.title}. Description: ${issue.description}`}
+        />
+        <meta name="keywords" content="edit, issue, project management" />
+      </Helmet>
+      <IssueForm issue={issue} />
+    </>
+  );
 };
 
 export default EditIssuePage;

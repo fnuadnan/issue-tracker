@@ -1,4 +1,5 @@
 import { Table } from "@radix-ui/themes";
+import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import IssueActions from "../components/IssueActions";
 import IssueStatusBadge from "../components/IssueStatusBadge";
@@ -14,6 +15,14 @@ const IssuesPage = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>Issue Tracker - Issue List</title>
+        <meta
+          name="description"
+          content="A list of all the issues currently available in the system."
+        />
+        <meta name="keywords" content="issues, status, project management" />
+      </Helmet>
       <IssueActions />
       <Table.Root variant="surface">
         <Table.Header>
