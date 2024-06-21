@@ -46,16 +46,17 @@ class APIClient<T> {
     }
   };
 
-  // get latest issues
-  getLatest = async () => {
+  // get single object
+  getSingle = async () => {
     try {
-      const res = await axiosIntance.get<T[]>(`${this.endpoint}/latest`);
+      const res = await axiosIntance.get<T>(this.endpoint);
       return res.data;
     } catch (error) {
-      console.error("APIClient getLatest error:", error);
+      console.error("APIClient getSingle error:", error);
       throw error;
     }
   };
+
   // post new issue
   post = async (inputs: NewIssueForm) => {
     try {

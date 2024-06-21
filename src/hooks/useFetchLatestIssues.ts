@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { IssueFormData } from "../entities/entities";
 import APIClient from "../services/api-client";
 
-const apiClient = new APIClient<IssueFormData>("/issues");
+const apiClient = new APIClient<IssueFormData>("/issues/latest");
 
 const useFetchLatestIssues = () => {
   const [issues, setIssues] = useState<IssueFormData[]>([]);
@@ -13,7 +13,7 @@ const useFetchLatestIssues = () => {
     const fetchData = async () => {
       try {
         setLoading(true);
-        const data = await apiClient.getLatest();
+        const data = await apiClient.get();
         setIssues(data);
         setLoading(false);
       } catch (error) {

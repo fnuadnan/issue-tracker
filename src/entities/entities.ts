@@ -27,3 +27,9 @@ export interface User {
   email: string;
   picture: string;
 }
+
+export interface IssueSummaryData {
+  open: number;
+  inProgress: number;
+  closed: number;
+}
