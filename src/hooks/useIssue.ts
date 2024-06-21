@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { toast } from "react-hot-toast";
 import { useParams } from "react-router-dom";
 import { IssueFormData, NewIssueForm } from "../entities/entities";
 import APIClient from "../services/api-client";
@@ -39,6 +40,7 @@ const useIssue = () => {
     } catch (err) {
       setLoading(false);
       setError("An unexpected error occurred.");
+      toast.error("Changes could not be saved."); // Show toast notification on the assingee select component
       return false; // Indicate failure
     }
   };
