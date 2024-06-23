@@ -7,10 +7,10 @@ import useIssue from "../hooks/useIssue";
 import useUsers from "../hooks/useUsers";
 
 const AssigneeSelect = ({ issue }: { issue: IssueFormData }) => {
-  const { users, error, loading } = useUsers();
+  const { users, error, isLoading } = useUsers();
   const { updateIssue } = useIssue();
 
-  if (loading) return <Skeleton />;
+  if (isLoading) return <Skeleton />;
 
   if (error) return null;
 
@@ -28,7 +28,7 @@ const AssigneeSelect = ({ issue }: { issue: IssueFormData }) => {
           <Select.Group>
             <Select.Label>Suggestions</Select.Label>
             <Select.Item value=" ">Unassigned</Select.Item>
-            {users.map((user) => (
+            {users?.map((user) => (
               <Select.Item key={user.id} value={user.id}>
                 {user.name}
               </Select.Item>
