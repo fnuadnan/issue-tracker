@@ -1,4 +1,5 @@
 import { Select } from "@radix-ui/themes";
+import { useLocation, useNavigate } from "react-router-dom";
 
 type Status = "OPEN" | "CLOSED" | "IN_PROGRESS";
 const statuses: { label: string; value?: Status }[] = [
@@ -9,8 +10,22 @@ const statuses: { label: string; value?: Status }[] = [
 ];
 
 const IssueStatusFilter = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const params = new URLSearchParams(location.search);
+  const currentStatus = params.get("status") || "";
+
   return (
-    <Select.Root>
+    <Select.Root
+      defaultValue={currentStatus}
+      onValueChange={(status) => {
+        const query = status == " " ? "" : `?status=${status}`;
+        navigate({
+          pathname: location.pathname,
+          search: query,
+        });
+      }}
+    >
       <Select.Trigger placeholder="Filter by status..." />
       <Select.Content>
         {statuses.map((status, index) => (

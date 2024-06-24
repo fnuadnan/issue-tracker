@@ -1,13 +1,20 @@
 import { Table } from "@radix-ui/themes";
 import { Helmet } from "react-helmet-async";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import IssueActions from "../components/IssueActions";
 import IssueStatusBadge from "../components/IssueStatusBadge";
 import LoadingIssuesPage from "../components/LoadingIssuesPage";
 import useFetchIssues from "../hooks/useFetchIssues";
 
+type Status = "OPEN" | "CLOSED" | "IN_PROGRESS" | undefined;
+
 const IssuesPage = () => {
-  const { issues, loading } = useFetchIssues();
+  // Get the status query parameter from the URL
+  const location = useLocation();
+  const params = new URLSearchParams(location.search);
+  const status = params.get("status") as Status;
+
+  const { issues, loading } = useFetchIssues(status);
 
   if (loading) {
     return <LoadingIssuesPage />;

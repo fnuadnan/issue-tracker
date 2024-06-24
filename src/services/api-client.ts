@@ -20,9 +20,10 @@ class APIClient<T> {
   };
 
   // get all issues
-  get = async () => {
+  get = async (query?: string) => {
     try {
-      const res = await axiosIntance.get<T[]>(this.endpoint);
+      const url = query ? `${this.endpoint}${query}` : this.endpoint;
+      const res = await axiosIntance.get<T[]>(url);
       return res.data;
     } catch (error) {
       console.error("APIClient get error:", error);
