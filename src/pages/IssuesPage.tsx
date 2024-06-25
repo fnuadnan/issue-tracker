@@ -1,3 +1,4 @@
+import { ArrowUpIcon } from "@radix-ui/react-icons";
 import { Table } from "@radix-ui/themes";
 import { Helmet } from "react-helmet-async";
 import { Link, useLocation } from "react-router-dom";
@@ -9,16 +10,29 @@ import useFetchIssues from "../hooks/useFetchIssues";
 type Status = "OPEN" | "CLOSED" | "IN_PROGRESS" | undefined;
 
 const IssuesPage = () => {
-  // Get the status query parameter from the URL
+  // Get the current location and query parameters
   const location = useLocation();
   const params = new URLSearchParams(location.search);
   const status = params.get("status") as Status;
+  const orderBy = params.get("orderBy");
 
   const { issues, loading } = useFetchIssues(status);
 
   if (loading) {
     return <LoadingIssuesPage />;
   }
+
+  const columns: { label: string; value: string; className?: string }[] = [
+    { label: "Issue", value: "title" },
+    { label: "Status", value: "status", className: "hidden md:table-cell" },
+    { label: "Created", value: "createdAt", className: "hidden md:table-cell" },
+  ];
+
+  // Function to update query parameters
+  const getUpdatedQueryString = (key: string, value: string) => {
+    params.set(key, value);
+    return params.toString();
+  };
 
   return (
     <div>
@@ -34,13 +48,22 @@ const IssuesPage = () => {
       <Table.Root variant="surface">
         <Table.Header>
           <Table.Row>
-            <Table.ColumnHeaderCell>Issue</Table.ColumnHeaderCell>
-            <Table.ColumnHeaderCell className="hidden md:table-cell">
-              Status
-            </Table.ColumnHeaderCell>
-            <Table.ColumnHeaderCell className="hidden md:table-cell">
-              Created
-            </Table.ColumnHeaderCell>
+            {columns.map((column) => (
+              <Table.ColumnHeaderCell
+                key={column.value}
+                className={column.className}
+              >
+                <Link
+                  to={{
+                    pathname: location.pathname,
+                    search: getUpdatedQueryString("orderBy", column.value),
+                  }}
+                >
+                  {column.label}
+                </Link>
+                {column.value === orderBy && <ArrowUpIcon className="inline" />}
+              </Table.ColumnHeaderCell>
+            ))}
           </Table.Row>
         </Table.Header>
         <Table.Body>
