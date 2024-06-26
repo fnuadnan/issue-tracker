@@ -5,10 +5,10 @@ interface PaginationProps {
   totalItems: number;
   itemsPerPage: number;
   currentPage: number;
-  //   onPageChange: (page: number) => void;
+  onPageChange: (page: number) => void;
 }
 
-const Pagination = ({ totalItems, itemsPerPage, currentPage}: PaginationProps) => {
+const Pagination = ({ totalItems, itemsPerPage, currentPage, onPageChange}: PaginationProps) => {
   // Calculate the total number of pages
   const totalPages = Math.ceil(totalItems / itemsPerPage);
 
@@ -27,6 +27,7 @@ const Pagination = ({ totalItems, itemsPerPage, currentPage}: PaginationProps) =
         variant="soft"
         className="cursor-pointer"
         disabled={currentPage === 1}
+        onClick={() => onPageChange(1)}
       >
         <DoubleArrowLeftIcon /> 
       </Button>
@@ -35,6 +36,7 @@ const Pagination = ({ totalItems, itemsPerPage, currentPage}: PaginationProps) =
         variant="soft"
         className="cursor-pointer"
         disabled={currentPage === 1} // disable the button if the current page is the first page
+        onClick={() => onPageChange(currentPage - 1)}
       >
         <ChevronLeftIcon />
       </Button>
@@ -45,6 +47,7 @@ const Pagination = ({ totalItems, itemsPerPage, currentPage}: PaginationProps) =
         variant="soft"
         className="cursor-pointer"
         disabled={currentPage === totalPages} // disable the button if the current page is the last page
+        onClick={() => onPageChange(currentPage + 1)}
       >
         <ChevronRightIcon />
       </Button>
@@ -53,6 +56,7 @@ const Pagination = ({ totalItems, itemsPerPage, currentPage}: PaginationProps) =
         variant="soft"
         className="cursor-pointer"
         disabled={currentPage === totalPages}
+        onClick={() => onPageChange(totalPages)} 
       >
         <DoubleArrowRightIcon />
       </Button>
@@ -63,3 +67,6 @@ const Pagination = ({ totalItems, itemsPerPage, currentPage}: PaginationProps) =
 };
 
 export default Pagination;
+
+
+
