@@ -1,12 +1,10 @@
 import { useEffect, useState } from "react";
-import { IssueFormData } from "../entities/entities";
+import { IssueFormData, SortField, Status } from "../entities/entities";
 import APIClient from "../services/api-client";
-
-type Status = "OPEN" | "CLOSED" | "IN_PROGRESS";
 
 const apiClient = new APIClient<IssueFormData>("/issues");
 
-const useFetchIssues = (status?: Status) => {
+const useFetchIssues = (status?: Status, orderBy?: SortField) => {
   const [issues, setIssues] = useState<IssueFormData[]>([]);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -15,8 +13,22 @@ const useFetchIssues = (status?: Status) => {
     const fetchData = async () => {
       try {
         setLoading(true);
-        const query = status ? `?status=${status}` : "";
+        const params = new URLSearchParams();
+
+        // Append status and orderBy to the query string if they are provided
+        if (status) {
+          params.append("status", status);
+        }
+        if (orderBy) {
+          params.append("orderBy", orderBy);
+        }
+
+        // Construct the query string
+        const query = params.toString() ? `?${params.toString()}` : "";
+
+        // Fetching data from the API using the constructed query
         const data = await apiClient.get(query);
+
         setIssues(data);
         setLoading(false);
       } catch (error) {
@@ -24,8 +36,9 @@ const useFetchIssues = (status?: Status) => {
         setError("An unexpected error occurred.");
       }
     };
+
     fetchData();
-  }, [status]);
+  }, [status, orderBy]); // Depend on status and orderBy to refetch when they change
 
   return { loading, error, issues };
 };

@@ -5,18 +5,17 @@ import { Link, useLocation } from "react-router-dom";
 import IssueActions from "../components/IssueActions";
 import IssueStatusBadge from "../components/IssueStatusBadge";
 import LoadingIssuesPage from "../components/LoadingIssuesPage";
+import { SortField, Status } from "../entities/entities";
 import useFetchIssues from "../hooks/useFetchIssues";
-
-type Status = "OPEN" | "CLOSED" | "IN_PROGRESS" | undefined;
 
 const IssuesPage = () => {
   // Get the current location and query parameters
   const location = useLocation();
   const params = new URLSearchParams(location.search);
   const status = params.get("status") as Status;
-  const orderBy = params.get("orderBy");
+  const orderBy = params.get("orderBy") as SortField;
 
-  const { issues, loading } = useFetchIssues(status);
+  const { issues, loading } = useFetchIssues(status, orderBy);
 
   if (loading) {
     return <LoadingIssuesPage />;

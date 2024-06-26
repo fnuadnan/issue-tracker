@@ -33,3 +33,6 @@ export interface IssueSummaryData {
   inProgress: number;
   closed: number;
 }
+
+export type Status = "OPEN" | "CLOSED" | "IN_PROGRESS"; // Possible statuses
+export type SortField = "createdAt" | "title" | "status"; // Possible sort fields
