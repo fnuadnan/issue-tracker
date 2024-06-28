@@ -8,6 +8,11 @@ export interface IssueFormData {
   assignedTo: any; // come back do this User | null
 }
 
+export interface FetchIssuesResponse {
+  issues: IssueFormData[];
+  totalItems: number;
+}
+
 export interface NewIssueForm {
   title: string;
   description: string;
