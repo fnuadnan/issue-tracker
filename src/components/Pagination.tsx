@@ -1,4 +1,9 @@
-import { ChevronLeftIcon, ChevronRightIcon, DoubleArrowLeftIcon, DoubleArrowRightIcon } from "@radix-ui/react-icons";
+import {
+  ChevronLeftIcon,
+  ChevronRightIcon,
+  DoubleArrowLeftIcon,
+  DoubleArrowRightIcon,
+} from "@radix-ui/react-icons";
 import { Button, Flex, Text } from "@radix-ui/themes";
 
 interface PaginationProps {
@@ -8,7 +13,12 @@ interface PaginationProps {
   onPageChange: (page: number) => void;
 }
 
-const Pagination = ({ totalItems, itemsPerPage, currentPage, onPageChange}: PaginationProps) => {
+const Pagination = ({
+  totalItems,
+  itemsPerPage,
+  currentPage,
+  onPageChange,
+}: PaginationProps) => {
   // Calculate the total number of pages
   const totalPages = Math.ceil(totalItems / itemsPerPage);
 
@@ -17,11 +27,12 @@ const Pagination = ({ totalItems, itemsPerPage, currentPage, onPageChange}: Pagi
 
   return (
     <Flex align="center" gap="2">
+      <Text size="2">
+        {" "}
+        Page {currentPage} of {totalPages}
+      </Text>
 
-
-      <Text size='2'> Page {currentPage} of {totalPages}</Text>
-
-	  {/* First page button & Previous page button - disabled if already on the first page */}
+      {/* First page button & Previous page button - disabled if already on the first page */}
       <Button
         color="gray"
         variant="soft"
@@ -29,9 +40,9 @@ const Pagination = ({ totalItems, itemsPerPage, currentPage, onPageChange}: Pagi
         disabled={currentPage === 1}
         onClick={() => onPageChange(1)}
       >
-        <DoubleArrowLeftIcon /> 
+        <DoubleArrowLeftIcon />
       </Button>
-	  <Button
+      <Button
         color="gray"
         variant="soft"
         className="cursor-pointer"
@@ -41,8 +52,8 @@ const Pagination = ({ totalItems, itemsPerPage, currentPage, onPageChange}: Pagi
         <ChevronLeftIcon />
       </Button>
 
-	  {/* Next page button &  Last page button - disabled if already on the last page */}
-	  <Button
+      {/* Next page button &  Last page button - disabled if already on the last page */}
+      <Button
         color="gray"
         variant="soft"
         className="cursor-pointer"
@@ -51,22 +62,17 @@ const Pagination = ({ totalItems, itemsPerPage, currentPage, onPageChange}: Pagi
       >
         <ChevronRightIcon />
       </Button>
-	  <Button
+      <Button
         color="gray"
         variant="soft"
         className="cursor-pointer"
         disabled={currentPage === totalPages}
-        onClick={() => onPageChange(totalPages)} 
+        onClick={() => onPageChange(totalPages)}
       >
         <DoubleArrowRightIcon />
       </Button>
-
-
     </Flex>
   );
 };
 
 export default Pagination;
-
-
-
