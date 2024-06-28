@@ -10,7 +10,7 @@ export interface IssueFormData {
 
 export interface FetchIssuesResponse {
   issues: IssueFormData[];
-  totalItems: number;
+  totalItems?: number; // because the useFetchlastest returns just an array of issues
 }
 
 export interface NewIssueForm {

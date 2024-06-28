@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import { FetchIssuesResponse, IssueFormData } from "../entities/entities";
+import { IssueFormData } from "../entities/entities";
 import APIClient from "../services/api-client";
 
-const apiClient = new APIClient<FetchIssuesResponse>("/issues/latest");
+const apiClient = new APIClient<IssueFormData[]>("/issues/latest");
 
 const useFetchLatestIssues = () => {
   const [issues, setIssues] = useState<IssueFormData[]>([]);
@@ -14,7 +14,7 @@ const useFetchLatestIssues = () => {
       try {
         setLoading(true);
         const data = await apiClient.get();
-        setIssues(data.issues);
+        setIssues(data);
         setLoading(false);
       } catch (error) {
         setLoading(false);
