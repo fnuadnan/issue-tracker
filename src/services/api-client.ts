@@ -2,7 +2,7 @@ import axios from "axios";
 import { NewIssueForm, UserData } from "../entities/entities";
 
 const axiosIntance = axios.create({
-  baseURL: "http://localhost:3000",
+  baseURL: "https://francophone-canoe-38103-ba53fb40d9db.herokuapp.com",
   withCredentials: true, // Ensure cookies are included in cross-site requests
 });
 
