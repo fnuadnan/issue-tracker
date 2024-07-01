@@ -40,7 +40,7 @@ const useFetchIssues = (
         // Fetching data from the API using the constructed query
         const data = await apiClient.get(query);
 
-        setTotalItems(data.totalItems);
+        setTotalItems(data.totalItems ?? 0);
         setIssues(data.issues);
         setLoading(false);
       } catch (error) {
